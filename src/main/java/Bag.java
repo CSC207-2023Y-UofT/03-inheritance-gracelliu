@@ -5,6 +5,8 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.util.Arrays;
+
 public abstract class Bag {
 
     // === Instance Variables ===
@@ -87,9 +89,9 @@ public abstract class Bag {
         if (numberOfContents == 0) {
             return null;
         } else {
-            String last_item = this.contents[numberOfContents - 1];
-            this.contents[numberOfContents - 1] = null;
             numberOfContents -= 1;
+            String last_item = this.contents[numberOfContents];
+            this.contents[numberOfContents] = null;
             return last_item;
         }
     }
@@ -102,16 +104,8 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
 
-        int old_capacity = this.capacity;
-
         this.capacity += n;
-        String[] new_contents = new String[this.capacity];
-
-        for (int i = 0; i < old_capacity; i++) {
-            new_contents[i] = contents[i];
-        }
-
-        this.contents = new_contents;
+        contents = Arrays.copyOf(contents, capacity);
     }
 
 
